@@ -5,6 +5,7 @@ export const AppRouter = () => {
   return (
     <>
       <Navbar/>
+      <main className="flex items-center justify-center w-full h-full px-24">
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="community" element={<CommunityPage />} />
@@ -12,6 +13,7 @@ export const AppRouter = () => {
         <Route path="vote" element={<VotePages />} />
         <Route path="*" element={<HomePage />} />
       </Routes>
+      </main>
       <Footer/>
     </>
   )
