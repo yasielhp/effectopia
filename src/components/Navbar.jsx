@@ -34,7 +34,7 @@ export const Navbar = () => {
   return (
     <nav className={styles.navbar}>
       <Link to="/#">
-        <img className={styles.logo} src="logo.svg" alt="Logo Effectopia"/>
+        <img className={styles.logo} src="img/logo.svg" alt="Logo Effectopia"/>
       </Link>
       <ul className={styles.ul}>
         {Object.keys(links).map(key => {

@@ -16,7 +16,7 @@ export const HomePage = () => {
             <Link className='px-4 py-2 leading-loose text-center w-full transition duration-150 ease-in-out rounded-lg border text-neutral-100 hover:text-orange-600 hover:border-orange-600' to="/member">Join us now</Link></div>
         </div>
         <div className="w-1/2">
-          <img className='w-full h-full select-none pointer-events-none' src='hero.svg' alt='hero image' />
+          <img className='w-full h-full select-none pointer-events-none' src='img/hero.svg' alt='hero image' />
         </div>
       </section>
     </>

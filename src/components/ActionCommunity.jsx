@@ -1,28 +1,28 @@
-import { ItemAction } from "./ItemAction"
+import { ItemAction } from "./"
 
 const lists = [
   {
     title: "Community members",
     description: "Find and interact with any member of the community",
-    icon: "",
+    icon: "img/community.svg",
     textButton: "View members"
   },
   {
     title: "Cast my vote",
     description: "To exercise my right to vote",
-    icon: "",
+    icon: "img/vote.svg",
     textButton: "Vote now"
   },
   {
     title: "Publish content",
     description: "Post any content so that other members can interact with it",
-    icon: "",
-    textButton: "View members"
+    icon: "img/publish.svg",
+    textButton: "Publish"
   },
   {
     title: "Chat with members",
     description: "Communicate with any member of the community",
-    icon: "",
+    icon:"img/chat.svg",
     textButton: "Chat now"
   }
 
