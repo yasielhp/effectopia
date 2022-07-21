@@ -46,11 +46,13 @@ export const Navbar = () => {
           )
         })}
       </ul>
+      <div className="w-36">
       {!address ? (
         <Button title="Connect wallet" onClick={metamask} />
       ) : (
         <Button title="Disconnect" onClick={disconnect} />
-      )}
+        )}
+      </div>
     </nav>
   )
 }

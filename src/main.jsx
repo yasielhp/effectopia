@@ -1,19 +1,27 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App";
-import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
+import { ThirdwebProvider } from "@thirdweb-dev/react";
 import './styles/index.css'
 import { BrowserRouter } from "react-router-dom";
 
+import {activeChainId} from "./constants/";
 
-// This is the chainId your dApp will work on.
-const activeChainId = ChainId.Mainnet;
+
+
+
+const appMeta = {
+  name: "Effectopia",
+  description: "A DAO for content creators around the world!",
+  logoUrl: "http://localhost:3000/logo.svg",
+  url: "https://effectopia.com",
+}
 
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
   <React.StrictMode>
-    <ThirdwebProvider desiredChainId={activeChainId}>
+    <ThirdwebProvider desiredChainId={activeChainId} dAppMeta={appMeta}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
