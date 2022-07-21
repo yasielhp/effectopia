@@ -46,7 +46,7 @@ export const Navbar = () => {
           )
         })}
       </ul>
-      <div className="w-36">
+      <div className="w-40">
       {!address ? (
         <Button title="Connect wallet" onClick={metamask} />
       ) : (

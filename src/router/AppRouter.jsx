@@ -5,7 +5,7 @@ export const AppRouter = () => {
   return (
     <>
       <Navbar/>
-      <main className="flex items-center justify-center w-full h-full px-24">
+      <main className="flex flex-col items-center justify-center w-full h-full px-24 py-4">
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="community" element={<CommunityPage />} />
