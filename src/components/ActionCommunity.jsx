@@ -5,25 +5,29 @@ const lists = [
     title: "Community members",
     description: "Find and interact with any member of the community",
     icon: "img/community.svg",
-    textButton: "View members"
+    textButton: "View members",
+    to: "/members"
   },
   {
     title: "Cast my vote",
-    description: "To exercise my right to vote",
+    description: "Vote and decide on the future of the community together ",
     icon: "img/vote.svg",
-    textButton: "Vote now"
+    textButton: "Vote now",
+    to: "/vote"
   },
   {
     title: "Publish content",
     description: "Post any content so that other members can interact with it",
     icon: "img/publish.svg",
-    textButton: "Publish"
+    textButton: "Publish",
+    to: "/publish"
   },
   {
     title: "Chat with members",
-    description: "Communicate with any member of the community",
+    description: "Connect with any member of the community anonymously.",
     icon:"img/chat.svg",
-    textButton: "Chat now"
+    textButton: "Chat now",
+    to: "/chat"
   }
 
 ]
@@ -39,6 +43,7 @@ export const ActionCommunity = () => {
             description={item.description}
             icon={item.icon}
             textButton={item.textButton}
+            to={item.to}
           />
       )
       }
