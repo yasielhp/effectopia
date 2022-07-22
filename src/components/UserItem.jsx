@@ -1,5 +1,6 @@
 import { shortenAddress } from '../helpers'
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
+import { Link } from 'react-router-dom';
 export const UserItem = ({ wallet, tokenAmount }) => {
 
   return (
@@ -17,9 +18,7 @@ export const UserItem = ({ wallet, tokenAmount }) => {
           <p className='text-sm text-neutral-400 text-center'>{tokenAmount}</p>
           </div>
       </div>
-      <div className="flex bg-orange-600 rounded-r-lg items-center justify-center py-1 px-4">
-          <p className='w-10 text-orange-900 hover:text-orange-700'>View</p>
-      </div>
+      <Link className='flex rounded-r-lg items-center justify-center py-1 px-4 transition-colors duration-150 ease-in-out text-orange-900 hover:text-orange-200 bg-orange-600 hover:bg-orange-800 font-semibold select-none' to="#">View</Link>
     </div>
   )
 }
