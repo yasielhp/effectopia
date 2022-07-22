@@ -6,7 +6,7 @@ const lists = [
     description: "Find and interact with any member of the community",
     icon: "img/community.svg",
     textButton: "View members",
-    to: "/members"
+    to: "/users"
   },
   {
     title: "Cast my vote",
