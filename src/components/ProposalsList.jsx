@@ -4,7 +4,7 @@ import { ProposalItem } from './ProposalItem';
 const proposals = [
   {
     title: 'Do you like this platform?',
-    option: ['👍', '👎',],
+    option: ['Yes', 'No'],
   },
   {
     title: 'Which network would you like us to use as the final network of the platform?',
