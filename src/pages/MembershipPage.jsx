@@ -1,12 +1,59 @@
-import { Link } from 'react-router-dom'
-import { useAddress, useMetamask } from '@thirdweb-dev/react';
+import { useEffect, useState } from 'react';
+import { useAddress, useMetamask, useEditionDrop } from '@thirdweb-dev/react';
+import Spline from '@splinetool/react-spline';
+
 import { shortenAddress} from '../helpers';
-import { Modal } from '../components';
+import { Modal, Button, Loading } from '../components';
+import { editionDropAddress } from '../constants';
 
 export const MembershipPage = () => {
 
   const address = useAddress()
   const connectWithMetamask = useMetamask()
+  const editionDrop = useEditionDrop(editionDropAddress);
+
+  const [hasClaimedNFT, setHasClaimedNFT] = useState(false);
+  const [isClaiming, setIsClaiming] = useState(false);
+
+  useEffect(() => {
+    // If they don't have a connected wallet, exit!
+    if (!address) {
+      return;
+    }
+
+    const checkBalance = async () => {
+      try {
+        const balance = await editionDrop.balanceOf(address, 0);
+        if (balance.gt(0)) {
+          setHasClaimedNFT(true);
+          console.log("🌟 this user has a membership NFT!");
+        } else {
+          setHasClaimedNFT(false);
+          console.log("😭 You are not yet a member of the community, claim your NFT to join.");
+        }
+      } catch (error) {
+        setHasClaimedNFT(false);
+        console.log(`😭 ${error.message}`);
+        console.error("Failed to get balance", error);
+      }
+    };
+    checkBalance();
+  }, [address, editionDrop]);
+
+  const mintNft = async () => {
+    try {
+      setIsClaiming(true);
+      await editionDrop.claim("0", 1);
+      console.log(`🌊 Successfully Minted! Check it out on OpenSea: https://testnets.opensea.io/assets/${editionDrop.getAddress()}/0`);
+      setHasClaimedNFT(true);
+    } catch (error) {
+      setHasClaimedNFT(false);
+      console.error("Failed to mint NFT", error);
+    } finally {
+      setIsClaiming(false);
+    }
+  };
+
   return (
     <>
     {
@@ -17,13 +64,19 @@ export const MembershipPage = () => {
                 <h1 className="w-auto text-4xl font-semibold text-left mb-7">Welcome user {shortenAddress(address) }</h1>
                 <p className="w-11/12 text-lg font-normal mb-7">With your membership you will be able to be part of our community, vote, publish content and interact with other users in an anonymous and decentralized way.</p>
               </div>
-              <div className="w-1/2 p-16">
-                <div className='flex flex-col items-center justify-center w-auto h-full px-20 py-10 rounded-lg shadow-lg bg-neutral-800 shadow-neutral-900'>
-                  <p className='w-full mb-5 text-center text-neutral-200'>You are not yet a member of the community, claim your NFT to join.</p>
-                  <Link className='w-auto px-10 py-2 leading-loose text-center rounded-lg transition-colors duration-150 ease-in-out text-orange-900 hover:text-orange-200 bg-orange-600 hover:bg-orange-800 font-semibold' to="#">Claim NFT</Link>
-                  <p className='w-full mt-2 text-center text-neutral-500'>Free membership</p>
-                </div>
-              </div>
+              {
+              !hasClaimedNFT
+                ? <div className="w-1/2 p-16">
+                    <div className='flex flex-col items-center justify-center w-auto h-full px-20 py-10 rounded-lg shadow-lg bg-neutral-800 shadow-neutral-900'>
+                    <p className='w-full mb-5 text-center text-neutral-200'>You are not yet a member of the community, claim your NFT to join</p>
+                    <Button title={isClaiming ? <Loading text="Minting..." /> : `Claim NFT`} onClick={mintNft} disabled={isClaiming} style={isClaiming ? `cursor-not-allowed opacity-70 hover:bg-orange-600 hover:text-orange-900` : ``} />
+                      <p className='w-full mt-2 text-center text-neutral-500'>Free membership</p>
+                    </div>
+                  </div>
+                : <div className="w-1/2">
+                    <Spline className='w' scene="https://prod.spline.design/9ppukUvwiPLxcP-z/scene.splinecode" />
+                  </div>
+              }
             </section>
     }
     </>

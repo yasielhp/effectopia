@@ -2,7 +2,6 @@
   "name": "effectopia",
   "private": true,
   "version": "1.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -10,6 +9,7 @@
   },
   "dependencies": {
     "@esbuild-plugins/node-globals-polyfill": "0.1.1",
+    "@splinetool/react-spline": "^2.2.1",
     "@thirdweb-dev/react": "2.4.1",
     "@thirdweb-dev/sdk": "2.3.8",
     "add": "^2.0.6",
