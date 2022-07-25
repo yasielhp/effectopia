@@ -1,10 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { useAddress, useMetamask, useEditionDrop } from '@thirdweb-dev/react';
 import Spline from '@splinetool/react-spline';
+import ReactCanvasConfetti from "react-canvas-confetti";
 
 import { shortenAddress} from '../helpers';
 import { Modal, Button, Loading } from '../components';
 import { editionDropAddress } from '../constants';
+
+const canvasStyles = {
+  position: "fixed",
+  pointerEvents: "none",
+  width: "100%",
+  height: "100%",
+  top: 0,
+  left: 0
+};
 
 export const MembershipPage = () => {
 
@@ -14,6 +24,50 @@ export const MembershipPage = () => {
 
   const [hasClaimedNFT, setHasClaimedNFT] = useState(false);
   const [isClaiming, setIsClaiming] = useState(false);
+
+  const refAnimationInstance = useRef(null);
+  const getInstance = useCallback((instance) => {
+    refAnimationInstance.current = instance;
+  }, []);
+
+  const makeShot = useCallback((particleRatio, opts) => {
+    refAnimationInstance.current &&
+      refAnimationInstance.current({
+        ...opts,
+        origin: { y: 0.5, x: 0.74 },
+        particleCount: Math.floor(200 * particleRatio)
+      });
+  }, []);
+
+  const fire = useCallback(() => {
+    makeShot(0.25, {
+      spread: 26,
+      startVelocity: 55
+    });
+
+    makeShot(0.2, {
+      spread: 60
+    });
+
+    makeShot(0.35, {
+      spread: 100,
+      decay: 0.91,
+      scalar: 0.8
+    });
+
+    makeShot(0.1, {
+      spread: 120,
+      startVelocity: 25,
+      decay: 0.92,
+      scalar: 1.2
+    });
+
+    makeShot(0.1, {
+      spread: 120,
+      startVelocity: 45
+    });
+  }, [makeShot]);
+
 
   useEffect(() => {
     // If they don't have a connected wallet, exit!
@@ -26,6 +80,7 @@ export const MembershipPage = () => {
         const balance = await editionDrop.balanceOf(address, 0);
         if (balance.gt(0)) {
           setHasClaimedNFT(true);
+          fire()
           console.log("🌟 this user has a membership NFT!");
         } else {
           setHasClaimedNFT(false);
@@ -59,7 +114,7 @@ export const MembershipPage = () => {
     {
         !address
           ? <Modal titleModal="Connect Wallet" textModal="You need to connect your wallet to view this content." textButton="Connect Wallet" actionButton={connectWithMetamask} />
-          : <section className="flex flex-row h-full py-10">
+          : <section className="flex flex-row min-h-full py-10">
               <div className="flex flex-col justify-start w-1/2 pt-16">
                 <h1 className="w-auto text-4xl font-semibold text-left mb-7">Welcome user {shortenAddress(address) }</h1>
                 <p className="w-11/12 text-lg font-normal mb-7">With your membership you will be able to be part of our community, vote, publish content and interact with other users in an anonymous and decentralized way.</p>
@@ -74,6 +129,7 @@ export const MembershipPage = () => {
                     </div>
                   </div>
                 : <div className="w-1/2">
+                    <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
                     <Spline className='w' scene="https://prod.spline.design/9ppukUvwiPLxcP-z/scene.splinecode" />
                   </div>
               }

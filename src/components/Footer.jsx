@@ -1,6 +1,6 @@
 export const Footer = () => {
   const styles = {
-    footer: `flex flex-col items-center justify-center py-2`,
+    footer: `w-full flex flex-col items-center justify-center  py-2`,
     text:`text-xs select-none text-neutral-600`,
   }
   const year = new Date().getFullYear()
