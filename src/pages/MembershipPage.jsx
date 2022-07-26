@@ -24,6 +24,7 @@ export const MembershipPage = () => {
 
   const [hasClaimedNFT, setHasClaimedNFT] = useState(false);
   const [isClaiming, setIsClaiming] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const refAnimationInstance = useRef(null);
   const getInstance = useCallback((instance) => {
@@ -72,18 +73,22 @@ export const MembershipPage = () => {
   useEffect(() => {
     const checkBalance = async () => {
       try {
+        setIsLoading(true);
         const balance = await editionDrop.balanceOf(address, 0);
         if (balance.gt(0)) {
           setHasClaimedNFT(true);
           console.log("🌟 this user has a membership NFT!");
+          setIsLoading(false);
         } else {
           setHasClaimedNFT(false);
           console.log("😭 You are not yet a member of the community, claim your NFT to join.");
+          setIsLoading(false);
         }
       } catch (error) {
         setHasClaimedNFT(false);
         console.log(`😭 ${error.message}`);
         console.error("Failed to get balance", error);
+        setIsLoading(false);
       }
     };
     checkBalance();
@@ -115,18 +120,26 @@ export const MembershipPage = () => {
                 <p className="w-11/12 text-lg font-normal mb-7">With your membership you will be able to be part of our community, vote, publish content and interact with other users in an anonymous and decentralized way.</p>
               </div>
               {
-              !hasClaimedNFT
-                ? <div className="w-1/2 p-16">
-                    <div className='flex flex-col items-center justify-center w-auto h-full px-20 py-10 rounded-lg shadow-lg bg-neutral-800 shadow-neutral-900'>
-                    <p className='w-full mb-5 text-center text-neutral-200'>You are not yet a member of the community, claim your NFT to join</p>
-                    <Button title={isClaiming ? <Loading text="Minting..." /> : `Claim NFT`} onClick={mintNft} disabled={isClaiming} style={isClaiming ? `cursor-not-allowed opacity-70 hover:bg-orange-600 hover:text-orange-900` : ``} />
-                      <p className='w-full mt-2 text-center text-neutral-500'>Free membership</p>
+                isLoading
+                  ? <div className="w-1/2">
+                      <Loading text='Loading Membership Pass' />
                     </div>
-                  </div>
-                : <div className="w-1/2">
-                    <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
-                    <Spline className='w' scene="https://prod.spline.design/9ppukUvwiPLxcP-z/scene.splinecode" />
-                  </div>
+                  : <>
+                    {
+                    !hasClaimedNFT
+                      ? <div className="w-1/2 p-16">
+                          <div className='flex flex-col items-center justify-center w-auto h-full px-20 py-10 rounded-lg shadow-lg bg-neutral-800 shadow-neutral-900'>
+                          <p className='w-full mb-5 text-center text-neutral-200'>You are not yet a member of the community, claim your NFT to join</p>
+                          <Button title={isClaiming ? <Loading text="Minting..." /> : `Claim NFT`} onClick={mintNft} disabled={isClaiming} style={isClaiming ? `cursor-not-allowed opacity-70 hover:bg-orange-600 hover:text-orange-900` : ``} />
+                            <p className='w-full mt-2 text-center text-neutral-500'>Free membership</p>
+                          </div>
+                        </div>
+                      : <div className="w-1/2">
+                          <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
+                          <Spline className='w' scene="https://prod.spline.design/9ppukUvwiPLxcP-z/scene.splinecode" />
+                        </div>
+                    }
+                    </>
               }
             </section>
     }
