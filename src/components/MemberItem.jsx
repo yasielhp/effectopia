@@ -1,7 +1,8 @@
 import { shortenAddress } from '../helpers'
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
 import { Link } from 'react-router-dom';
-export const UserItem = ({ address, tokenAmount }) => {
+import { Loading } from './Loading';
+export const MemberItem = ({ address, tokenAmount }) => {
 
   return (
     <div className='flex flex-row w-full overflow-hidden lg:my-3 lg:px-3 lg:w-1/3 xl:my-3 xl:px-3 xl:w-1/3 '>

@@ -1,22 +1,27 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useEditionDrop, useToken } from '@thirdweb-dev/react';
+import { Loading} from '../components/Loading';
 
-import { UserItem } from './UserItem';
+import { MemberItem } from './MemberItem';
 import { tokenAddress, editionDropAddress } from '../constants';
 
-export const UserList = () => {
+export const MemberList = () => {
 
   const token = useToken(tokenAddress)
   const editionDrop = useEditionDrop(editionDropAddress);
   const [memberTokenAmounts, setMemberTokenAmounts] = useState([]);
   const [memberAddresses, setMemberAddresses] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
 
   useEffect(() => {
   const getAllAddresses = async () => {
     try {
+      setIsLoading(true);
       const memberAddresses = await editionDrop.history.getAllClaimerAddresses(0);
       setMemberAddresses(memberAddresses);
       console.log("🚀 Members addresses", memberAddresses);
+      setIsLoading(false)
     } catch (error) {
       console.error("failed to get member list", error);
     }
@@ -27,9 +32,11 @@ export const UserList = () => {
   useEffect(() => {
   const getAllBalances = async () => {
     try {
+      setIsLoading(true);
       const amounts = await token.history.getAllHolderBalances();
       setMemberTokenAmounts(amounts);
       console.log("👜 Amounts", amounts);
+      setIsLoading(false)
     } catch (error) {
       console.error("failed to get member balances", error);
     }
@@ -48,12 +55,17 @@ export const UserList = () => {
 }, [memberAddresses, memberTokenAmounts]);
 
   return (
-    <div className="flex flex-wrap overflow-hidden">
+    <>
       {
-        memberList.map((member) =>
-          <UserItem key={member.address} address={member.address} tokenAmount={member.tokenAmount} />
-        )
+        isLoading
+          ? <Loading text="Loading member list " />
+          : <>
+              <p className='w-11/12 text-xl font-semibold mb-4'>Member list</p>
+              <div className="flex flex-wrap overflow-hidden">
+              {memberList.map((member) => <MemberItem key={member.address} address={member.address} tokenAmount={member.tokenAmount} />)}
+              </div>
+            </>
       }
-    </div>
+    </>
   )
 }

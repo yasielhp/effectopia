@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { HomePage, MembershipPage, CommunityPage,UsersPage, VotePage, PublishPage, ChatPage, ErrorPage } from "../pages";
+import { HomePage, MembershipPage, CommunityPage,MemberPage, VotePage, PublishPage, ChatPage, ErrorPage } from "../pages";
 import { Navbar, Footer } from '../components';
 export const AppRouter = () => {
   return (
@@ -10,7 +10,7 @@ export const AppRouter = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="membership" element={<MembershipPage />} />
         <Route path="community" element={<CommunityPage />} />
-        <Route path="users" element={<UsersPage />} />
+        <Route path="member" element={<MemberPage />} />
         <Route path="vote" element={<VotePage />} />
         <Route path="publish" element={<PublishPage />} />
         <Route path="chat" element={<ChatPage />} />

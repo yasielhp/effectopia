@@ -70,17 +70,11 @@ export const MembershipPage = () => {
 
 
   useEffect(() => {
-    // If they don't have a connected wallet, exit!
-    if (!address) {
-      return;
-    }
-
     const checkBalance = async () => {
       try {
         const balance = await editionDrop.balanceOf(address, 0);
         if (balance.gt(0)) {
           setHasClaimedNFT(true);
-          fire()
           console.log("🌟 this user has a membership NFT!");
         } else {
           setHasClaimedNFT(false);
@@ -101,6 +95,7 @@ export const MembershipPage = () => {
       await editionDrop.claim("0", 1);
       console.log(`🌊 Successfully Minted! Check it out on OpenSea: https://testnets.opensea.io/assets/${editionDrop.getAddress()}/0`);
       setHasClaimedNFT(true);
+      fire()
     } catch (error) {
       setHasClaimedNFT(false);
       console.error("Failed to mint NFT", error);
