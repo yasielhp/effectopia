@@ -1,7 +1,6 @@
 import { shortenAddress } from '../helpers'
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
 import { Link } from 'react-router-dom';
-import { Loading } from './Loading';
 export const MemberItem = ({ address, tokenAmount }) => {
 
   return (

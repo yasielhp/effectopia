@@ -1,24 +1,16 @@
 import sdk from "./1-initialize-sdk.js";
-import { MaxUint256 } from "@ethersproject/constants";
+import { ethers } from "ethers";
 
-const editionDrop = sdk.getEditionDrop("0xDBc61AeD99ff4b73656922BA0681d8ba9ADB62b3");
+const editionDrop = sdk.getEditionDrop("0x9F2050d4f96F15328Bd3d125d8aAD7De21a25d40");
 
 (async () => {
   try {
-    // We define our claim conditions, this is an array of objects because
-    // we can have multiple phases starting at different times if we want to
     const claimConditions = [{
-      // When people are gonna be able to start claiming the NFTs (now)
       startTime: new Date(),
-      // The maximum number of NFTs that can be claimed.
-      maxQuantity: 50_000,
-      // The price of our NFT (free)
+      maxQuantity: 100_000,
       price: 0,
-      // The amount of NFTs people can claim in one transaction.
       quantityLimitPerTransaction: 1,
-      // We set the wait between transactions to MaxUint256, which means
-      // people are only allowed to claim once.
-      waitInSeconds: MaxUint256,
+      waitInSeconds: ethers.constants.MaxUint256,
     }]
 
     await editionDrop.claimConditions.set("0", claimConditions);

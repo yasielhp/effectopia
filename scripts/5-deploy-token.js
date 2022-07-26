@@ -1,24 +1,16 @@
-import { AddressZero } from "@ethersproject/constants";
 import sdk from "./1-initialize-sdk.js";
 import { readFileSync } from "fs";
+import { ethers } from 'ethers';
 
 (async () => {
   try {
-    // Deploy a standard ERC-20 contract.
     const tokenAddress = await sdk.deployer.deployToken({
-      // What's your token's name? Ex. "Ethereum"
       name: "Effectopia Governance Token",
       image: readFileSync("scripts/assets/token.svg"),
-      // What's your token's symbol? Ex. "ETH"
       symbol: "EFFE",
-      // This will be in case we want to sell our token,
-      // because we don't, we set it to AddressZero again.
-      primary_sale_recipient: AddressZero,
+      primary_sale_recipient: ethers.constants.AddressZero,
     });
-    console.log(
-      "✅ Successfully deployed token module, address:",
-      tokenAddress,
-    );
+    console.log("✅ Successfully deployed token module, address:",tokenAddress,);
   } catch (error) {
     console.error("failed to deploy token module", error);
   }

@@ -1,20 +1,20 @@
-export const ProposalItem = ({proposal}) => {
+export const ProposalItem = ({description, votes, proposalId}) => {
   return (
-      <fieldset className="my-6 p-2 border rounded-lg w-full" key={proposal.proposalId}>
-        <legend className="text-lg px-1">{proposal.description}</legend>
+      <fieldset className="my-6 p-2 border rounded-lg w-full">
+        <legend className="text-lg px-1">{description}</legend>
           <div className="mt-2 flex ">
-            {proposal.votes.map(({ type, label }) => (
-              <div className="flex items-center mr-4 mb-4" key={type}>
+            {votes.map((vote) => (
+              <div className="flex items-center mr-4 mb-4" key={vote.type}>
                 <input
                   type="radio"
                   className="sr-only peer"
-                  id={proposal.proposalId + "-" + type}
-                  name={proposal.proposalId}
-                  value={type}
-                  defaultChecked={type === 2}
+                  id={proposalId + "-" + vote.type}
+                  name={proposalId}
+                  value={vote.type}
+                  defaultChecked={vote.type === 2}
                 />
-                <label className="flex px-4 py-2 bg-none border border-none rounded-lg cursor-pointer focus:outline-none hover:bg-orange-900 hover:text-orange-200 peer-checked:ring-orange-800 peer-checked:text-orange-200 peer-checked:bg-orange-900  peer-checked:border-transparent" htmlFor={proposal.proposalId + "-" + type}>
-                  {label}
+                <label className="flex px-4 py-2 bg-none border border-none rounded-lg cursor-pointer focus:outline-none hover:bg-orange-900 hover:text-orange-200 peer-checked:ring-orange-800 peer-checked:text-orange-200 peer-checked:bg-orange-900  peer-checked:border-transparent" htmlFor={proposalId + "-" + vote.type}>
+                  {vote.label}
                 </label>
               </div>
             ))}
