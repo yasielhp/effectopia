@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 export const HomePage = () => {
   return (
     <>
-      <section className="flex lg:flex-row flex-col-reverse">
+      <section className="flex flex-row ">
         <div className="flex flex-col justify-center w-full lg:w-1/2">
           <h1 className="w-4/5 text-5xl font-semibold text-left mb-7">
             Community as unique as its users
@@ -32,9 +32,9 @@ export const HomePage = () => {
             </Link>
           </div>
         </div>
-        <div className="w-full lg:w-1/2">
+        <div className="w-1/2 invisible lg:visible">
           <img
-            className="w-full h-full pointer-events-none select-none"
+            className="w-full h-full pointer-events-none select-none invisible lg:visible"
             src="img/hero.svg"
             alt="hero image"
           />
