@@ -12,7 +12,7 @@ export const Navbar = () => {
   const disconnect = useDisconnect();
 
   return (
-    <header className="flex items-center p-6 justify-center">
+    <header className="flex items-center p-6 justify-between">
       <input type="checkbox" id="menu" hidden className="peer" />
       <label
         htmlFor="menu"
@@ -59,7 +59,7 @@ export const Navbar = () => {
       </label>
       <nav className="absolute top-0 left-0 right-0 z-40 hidden min-h-full pt-4 bg-neutral-900 peer-checked:block lg:block lg:static lg:bg-inherit lg:py-0 lg:min-h-0 bg-opacity-40 backdrop-blur-lg lg:backdrop-blur-0">
         <ul className=" flex flex-col items-center lg:items-start lg:flex-row font-medium  gap-y-1 gap-x-4">
-          <li className="invisible sm:visible md:visible lg:visible xl:visible 2xl:visible mx-10">
+          <li className="invisible sm:invisible md:invisible lg:invisible xl:visible 2xl:visible mx-10">
             <Link
               className="flex cursor-pointer select-none hover:opacity-60 transition ease-in-ou"
               to="/"
