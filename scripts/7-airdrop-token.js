@@ -1,15 +1,10 @@
 import sdk from "./1-initialize-sdk.js";
 
-// This is the address to our ERC-1155 membership NFT contract.
-const editionDrop = sdk.getEditionDrop("0xDBc61AeD99ff4b73656922BA0681d8ba9ADB62b3");
-
-// This is the address to our ERC-20 token contract.
-const token = sdk.getToken("0x8Aa884099d1a86eB2810Ec2A25434BE5dfe65330");
+const editionDrop = sdk.getEditionDrop("0x9F2050d4f96F15328Bd3d125d8aAD7De21a25d40");
+const token = sdk.getToken("0x7324DC5B0a2B0C858b95dfD5c8A5996144535EaF");
 
 (async () => {
   try {
-    // Grab all the addresses of people who own our membership NFT,
-    // which has a tokenId of 0.
     const walletAddresses = await editionDrop.history.getAllClaimerAddresses(0);
 
     if (walletAddresses.length === 0) {
@@ -18,23 +13,17 @@ const token = sdk.getToken("0x8Aa884099d1a86eB2810Ec2A25434BE5dfe65330");
       );
       process.exit(0);
     }
-
-    // Loop through the array of addresses.
     const airdropTargets = walletAddresses.map((address) => {
-      // Pick a random # between 1000 and 10000.
       const randomAmount = Math.floor(Math.random() * (10000 - 1000 + 1) + 1000);
       console.log("✅ Going to airdrop", randomAmount, "tokens to", address);
 
-      // Set up the target.
       const airdropTarget = {
         toAddress: address,
         amount: randomAmount,
       };
-
       return airdropTarget;
     });
 
-    // Call transferBatch on all our airdrop targets.
     console.log("🌈 Starting airdrop...");
     await token.transferBatch(airdropTargets);
     console.log("✅ Successfully airdropped tokens to all the holders of the NFT!");
