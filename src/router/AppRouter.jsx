@@ -14,7 +14,7 @@ export const AppRouter = () => {
   return (
     <>
       <Navbar />
-      <main className="flex flex-col items-center justify-center w-screen h-full px-6 sm:px-10 md:px-20 lg:px-px34">
+      <main className="flex flex-col items-center justify-center w-screen h-full px-6 lg:px-34">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="membership" element={<MembershipPage />} />
