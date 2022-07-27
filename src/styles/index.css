@@ -6,6 +6,6 @@
 
 @layer components {
   body {
-    @apply min-h-screen w-[99vw] max-w-[100vw] text-base overflow-x-hidden bg-neutral-900 font-Inter text-neutral-100;
+    @apply min-h-screen w-[99vw] max-w-[100vw] text-base overflow-x-hidden bg-neutral-900 font-Inter text-orange-50;
   }
 }
