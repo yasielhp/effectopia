@@ -4,7 +4,7 @@ export const HomePage = () => {
     <>
       <section className="flex flex-col-reverse lg:flex-row w-full ">
         <div className="flex flex-col justify-center lg:w-1/2">
-          <h1 className="lg:w-4/5 text-3xl lg:text-5xl font-semibold text-left mb-7">
+          <h1 className="lg:w-4/5 text-3xl lg:text-5xl  font-semibold text-left mb-7">
             Community as unique as its users
           </h1>
           <h2 className="text-2xl lg:text-4xl font-light mb-7">
@@ -32,12 +32,8 @@ export const HomePage = () => {
             </Link>
           </div>
         </div>
-        <div className="flex flex-col justify-center w-full h-1 lg:w-1/2 invisible lg:h-full lg:visible">
-          <img
-            className="w-full h-full pointer-events-none select-none"
-            src="img/hero.svg"
-            alt="hero image"
-          />
+        <div className="">
+          <img className="" src="img/hero.svg" alt="hero image" />
         </div>
       </section>
     </>

@@ -35,19 +35,13 @@ export const ProposalsList = () => {
         const balance = await editionDrop.balanceOf(address, 0);
         if (balance.gt(0)) {
           setHasClaimedNFT(true);
-          console.log('🌟 this user has a membership NFT!');
           setIsLoading(false);
         } else {
           setHasClaimedNFT(false);
-          console.log(
-            '😭 You are not yet a member of the community, claim your NFT to join.'
-          );
           setIsLoading(false);
         }
       } catch (error) {
         setHasClaimedNFT(false);
-        console.log(`😭 ${error.message}`);
-        console.error('Failed to get balance', error);
         setIsLoading(false);
       }
     };
@@ -59,10 +53,7 @@ export const ProposalsList = () => {
       try {
         const proposals = await vote.getAll();
         setProposals(proposals);
-        console.log('🌈 Proposals:', proposals);
-      } catch (error) {
-        console.log('failed to get proposals', error);
-      }
+      } catch (error) {}
     };
     getAllProposals();
   }, [vote]);
@@ -79,21 +70,18 @@ export const ProposalsList = () => {
           address
         );
         setHasVoted(hasVoted);
-        setIsLoading(false);
+        setIsLoading(true);
         if (hasVoted) {
-          console.log('🥵 User has already voted');
           setIsLoading(false);
         } else {
-          console.log('🙂 User has not voted yet');
           setIsLoading(false);
         }
       } catch (error) {
-        console.error('Failed to check if wallet has voted', error);
         setIsLoading(false);
       }
     };
     checkIfUserHasVoted();
-  }, [proposals, address, vote]);
+  }, []);
 
   const handelSubmit = async (e) => {
     e.preventDefault();
@@ -140,15 +128,9 @@ export const ProposalsList = () => {
             })
           );
           setHasVoted(true);
-          console.log('successfully voted');
-        } catch (err) {
-          console.error('failed to execute votes', err);
-        }
-      } catch (err) {
-        console.error('failed to vote', err);
-      }
+        } catch (err) {}
+      } catch (err) {}
     } catch (err) {
-      console.error('failed to delegate tokens');
     } finally {
       setIsVoting(false);
     }
@@ -183,27 +165,31 @@ export const ProposalsList = () => {
                   proposalId={proposal.proposalId}
                 />
               ))}
-              <Button
-                type="submit"
-                style={`${
-                  hasVoted
-                    ? `cursor-not-allowed opacity-70 bg-neutral-700 text-neutral-400 hover:bg-neutral-700 hover:text-neutral-400`
-                    : isVoting
-                    ? `cursor-progress opacity-70 hover:bg-orange-600 hover:text-orange-900`
-                    : ``
-                }`}
-                onClick={handelSubmit}
-                disabled={isVoting || hasVoted}
-                title={
-                  isVoting ? (
-                    <Loading text="Voting..." />
-                  ) : hasVoted ? (
-                    'You Already Voted'
-                  ) : (
-                    'Submit Votes'
-                  )
-                }
-              />
+              {!isLoading ? (
+                <Button
+                  type="submit"
+                  style={`${
+                    hasVoted
+                      ? `cursor-not-allowed opacity-70 bg-neutral-700 text-neutral-400 hover:bg-neutral-700 hover:text-neutral-400`
+                      : isVoting
+                      ? `cursor-progress opacity-70 hover:bg-orange-600 hover:text-orange-900`
+                      : ``
+                  }`}
+                  onClick={handelSubmit}
+                  disabled={isVoting || hasVoted}
+                  title={
+                    isVoting ? (
+                      <Loading text="Voting..." />
+                    ) : hasVoted ? (
+                      'You Already Voted'
+                    ) : (
+                      'Submit Votes'
+                    )
+                  }
+                />
+              ) : (
+                <></>
+              )}
               {!hasVoted && (
                 <p className="text-center text-xs text-neutral-600 py-2">
                   This will trigger multiple transactions that you

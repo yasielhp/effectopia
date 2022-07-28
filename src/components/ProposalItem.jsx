@@ -1,15 +1,6 @@
-export const ProposalItem = ({
-  description,
-  votes,
-  proposalId,
-  hasVoted,
-}) => {
+export const ProposalItem = ({ description, votes, proposalId }) => {
   return (
-    <fieldset
-      className={`my-6 p-2 border rounded-lg w-full ${
-        hasVoted ? `opacity-50` : ``
-      }`}
-    >
+    <fieldset className={`my-6 p-2 border rounded-lg w-full `}>
       <legend className="text-lg px-1">{description}</legend>
       <div className="mt-2 flex ">
         {votes.map((vote) => (
@@ -23,15 +14,9 @@ export const ProposalItem = ({
               id={proposalId + '-' + vote.type}
               name={proposalId}
               value={vote.type}
-              defaultChecked={vote.type === 2}
-              disabled={hasVoted}
             />
             <label
-              className={`flex px-4 py-2 bg-none border border-none rounded-lg  select-none ${
-                hasVoted
-                  ? `cursor-not-allowed`
-                  : `cursor-pointer  focus:outline-none hover:bg-orange-900 hover:text-orange-200 peer-checked:ring-orange-800 peer-checked:text-orange-200 peer-checked:bg-orange-900  peer-checked:border-transparent`
-              } `}
+              className={`flex px-4 py-2 bg-none border border-none rounded-lg  select-none cursor-pointer  focus:outline-none hover:bg-orange-900 hover:text-orange-200 peer-checked:ring-orange-800 peer-checked:text-orange-200 peer-checked:bg-orange-900  peer-checked:border-transparent`}
               htmlFor={proposalId + '-' + vote.type}
             >
               {vote.label}

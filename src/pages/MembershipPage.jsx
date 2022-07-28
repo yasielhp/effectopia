@@ -24,13 +24,9 @@ export const MembershipPage = () => {
     try {
       setIsClaiming(true);
       await editionDrop.claim('0', 1);
-      console.log(
-        `🌊 Successfully Minted! Check it out on OpenSea: https://testnets.opensea.io/assets/${editionDrop.getAddress()}/0`
-      );
       setHasClaimedNFT(true);
     } catch (error) {
       setHasClaimedNFT(false);
-      console.error('Failed to mint NFT', error);
       setError(error);
     } finally {
       setIsClaiming(false);
@@ -47,8 +43,8 @@ export const MembershipPage = () => {
           actionButton={connectWithMetamask}
         />
       ) : (
-        <section className="flex flex-col lg:flex-row w-full lg:py-16">
-          <div className="flex flex-col w-full lg:w-5/6 lg:mr-36 justify-center items-start">
+        <section className="flex flex-col lg:flex-row w-full lg:py-16 gap-x-10">
+          <div className="flex flex-col  justify-center items-start">
             <h1 className="lg:w-4/5 text-3xl lg:text-5xl font-semibold text-left mb-7">
               Welcome user {shortenAddress(address)}
             </h1>
@@ -65,7 +61,7 @@ export const MembershipPage = () => {
           ) : (
             <>
               {!hasClaimedNFT || error ? (
-                <div className="flex flex-col w-full lg:w-2/3">
+                <div className="flex justify-center items-center">
                   <div className="flex flex-col items-center justify-center w-auto h-full px-5 lg:px-20 py-5 lg:py-10 rounded-lg shadow-lg bg-neutral-800 shadow-neutral-900">
                     <p className="w-full mb-5 text-center text-neutral-200">
                       You are not yet a member of the community, claim
@@ -101,7 +97,7 @@ export const MembershipPage = () => {
                   </div>
                 </div>
               ) : (
-                <div className="flex w-full h-full ">
+                <div className="flex justify-center items-center">
                   <Spline scene="https://prod.spline.design/9ppukUvwiPLxcP-z/scene.splinecode" />
                 </div>
               )}

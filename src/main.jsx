@@ -17,14 +17,11 @@ const appMeta = {
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
-  <React.StrictMode>
-    <ThirdwebProvider
-      desiredChainId={activeChainId}
-      dAppMeta={appMeta}
-    >
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ThirdwebProvider>
-  </React.StrictMode>
+  //<React.StrictMode>
+  <ThirdwebProvider desiredChainId={activeChainId} dAppMeta={appMeta}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </ThirdwebProvider>
+  //</React.StrictMode>
 );
