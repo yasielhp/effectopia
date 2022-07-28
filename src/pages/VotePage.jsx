@@ -16,11 +16,11 @@ export const VotePage = () => {
         />
       ) : (
         <>
-          <section className="flex flex-col py-10">
-            <h1 className="text-5xl font-semibold mb-7 w-4/5 text-left">
+          <section className="flex flex-col">
+            <h1 className="lg:w-4/5 text-3xl lg:text-5xl font-semibold text-left mb-7">
               Cast my vote
             </h1>
-            <p className="w-11/12 text-lg font-normal mb-7">
+            <p className="w-full text-base lg:text-lg font-normal mb-7">
               Effectopia is a revolutionary virtual community; a
               real-time peer-to-peer collaboration platform for
               teachers and students powered by the #MASSIVEADOPTION

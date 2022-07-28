@@ -161,14 +161,14 @@ export const ProposalsList = () => {
       ) : (
         <>
           {!hasClaimedNFT && <p>no vote access</p> ? (
-            <div className="flex flex-col items-center justify-center w-auto h-full px-20 py-10 rounded-lg shadow-lg bg-neutral-800 shadow-neutral-900">
+            <div className="flex flex-col items-center justify-center w-auto h-full px-5 lg:px-20 py-5 lg:py-10 rounded-lg shadow-lg bg-neutral-800 shadow-neutral-900">
               <p className="w-full mb-5 text-center text-neutral-200">
                 You are not yet a member of the community, claim your
                 NFT to join
               </p>
               <Link
                 to="/membership"
-                className="w-full px-4 py-2 leading-loose text-center font-semibold rounded-lg transition-colors duration-150 ease-in-out text-orange-900 hover:text-orange-200 bg-orange-600 hover:bg-orange-800"
+                className="w-full h-11 text-orange-100 bg-orange-500 hover:bg-orange-600 focus:ring-1 focus:outline-none focus:ring-orange-400 font-medium rounded-lg text-base px-5 py-2.5 text-center mr-3 md:mr-0"
               >
                 Join us now
               </Link>
